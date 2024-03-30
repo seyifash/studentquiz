@@ -1,0 +1,276 @@
+.verification,
+.CreateStudent  {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0px auto;
+    align-items: center;
+    margin-top: 100px;
+}
+.CreateStudent h2,
+.verification h2 {
+    font-size: 3rem;
+    line-height: 5rem;
+}
+.verification h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 3rem;
+}
+.verification input,
+.CreateStudent input {
+    width: 300px;
+    height: 40px;
+    outline: none;
+    border: 1px solid orange ;
+    border-radius: 10px;
+    box-shadow: 0px 7px 25px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+    padding: 0px 20px;
+    color: #000;
+    font-size: 1rem;
+}
+.verification button ,
+.CreateStudent button{
+    padding: 10px 30px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    border-radius: 8px;
+    background: orange;
+}
+
+.verification button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.CreateStudent h2 {
+    font-size: 2rem;
+}
+.CreateStudent input {
+    width: 500px;
+    height: 40px;
+}
+
+.CreateStudent button {
+    width: 500px;
+    height: 40px;
+}
+
+.instructions {
+    padding: 30px;
+}
+.instructions h2 {
+    font-size: 2.5rem;
+    color: orange;
+    line-height: 4rem; 
+}
+.instructions p{
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    color: #000;
+}
+
+.instructions ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+.instructions ul li {
+    font-size: 1rem;
+    font-weight: 600;
+    color:#000;
+    line-height: 1.5rem;
+}
+.instructions .btn3 {
+    padding: 12px 15px;
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1rem;
+}
+.instructions .btn3:hover {
+    background: orange;
+    color: #000;
+}
+
+.questions {
+    margin: 2px auto;
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+    line-height: 25px;
+    color: var(--black1);
+    margin-bottom: 20px;
+    box-shadow: 0px 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    border: 1px solid orange;
+    position: relative;
+}
+.questions h2 {
+    width: 100%;
+    padding: 15px 10px;
+    background: orange;
+    border-radius: 6px;
+    margin-bottom: 20px;
+
+}
+
+.questions .question {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 0px;
+    
+}
+
+.questions  .sub-timer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%
+}
+.questions  .sub-timer .subject {
+    max-width: 400px;
+    line-height: 30px;
+    color: white;
+    font-weight: 500;
+    background: #000;
+}
+.questions .sub-timer h1 {
+    font-size: 3rem;
+}
+
+.questions .question h3 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.questions .question .header {
+    padding: 10px 0px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.questions .question .header strong {
+    color: orange;
+    padding-right: 10px;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.questions .question img {
+    width: 300px;
+    border-radius: 6px;
+    margin: 20px 0px;
+}
+
+.questions .question p {
+    font-weight: 400;
+    color: var #1a1a1a;
+    line-height: 25px;
+    font-size: 1.2rem;
+    margin: 10px 0px;
+    font-weight: 600;
+}
+
+.questions .question .options-div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.questions .question .options-div .checks {
+    display: flex;
+    margin: 10px 0px;
+    margin-left: 50px;
+    position: relative;
+    font-weight: 500;
+}
+
+.questions .question .options-div .checks::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid orange;
+    background-image: url("../assets/uncheck.png");
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    top: 5px;
+    cursor: pointer;
+    left: -50px;
+}
+
+.questions .question .options-div .checked::before {
+    background-image: url("../assets/ok3.png");
+}
+
+
+.questions .question .options-div span {
+    font-size: 16px;
+    color: #1a1a1a;
+}
+
+/*.questions  .options-div span:nth-child(1) {
+    padding-left: 0px;
+}*/
+.questions .question .options-div span strong {
+    padding: 0px 10px;
+    color: var(--purple3);
+}
+
+.pagination {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+
+}
+.pagination .prev,
+.pagination .current {
+    padding: 7px 15px;
+    background: orange;
+    color: #000;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-weight: 600;
+    border: none;
+}
+.pagination .prev {
+    background: #000;
+    color: orange;
+}
+.pagination .key {
+    padding: 10px 15px;
+    background: rgb(230, 229, 229);
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0px 5px;
+}
+.pagination .prev:hover,
+.pagination .current:hover {
+    background: var(--purple3);
+    cursor: pointer;
+}
+.btn4 {
+    align-self: flex-end;
+    margin: 20px 0px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 7px;
+}
+
