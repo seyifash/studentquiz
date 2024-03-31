@@ -2,16 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import './LinkVerification.css';
 import logo from '../laptop.png';
 import testQuestions from './question';
+import 'boxicons/css/boxicons.min.css';
+import { useParams } from 'react-router-dom';
 /*import TestQuestions from './GenerateQuestions';*/
 
 const LinkVerification = () => {
+    const { id } = useParams();
     const [passCode, setPassCode] = useState('');
     const [studentForm, setStudentForm] = useState(false);
     const [showInstruction, setShowInstruction] = useState(false);
-    const [student, setStudentName] = useState({
-        firstName: '',
-        LastName: ''
-    });
+    const [student, setStudentName] = useState({firstName: '', LastName: ''});
     const [questionsVisible, setQuestionsVisible] = useState(false); 
     const [timer, setTimer] = useState(0); 
     const [testStarted, setTestStarted] = useState(false);
@@ -21,6 +21,8 @@ const LinkVerification = () => {
     const [minute, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
     const [hours, setHours] = useState(0);
+    const [submitMessage, setSubmitMessage ] = useState('');
+    const [studentId, setStudentId] = useState(null);
 
    
 
@@ -30,10 +32,20 @@ const LinkVerification = () => {
 
     const [checkedStates, setCheckedStates] = useState(Array(questions.length).fill(null));
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         console.log('submitted', passCode);
-        setPassCode(''); 
-        setStudentForm(true);
+        const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/verify/${id}`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(passCode)
+        });
+        if (!response.ok) {
+            throw new Error("Error posting Id");
+        }
+        const data = await response.json(); 
+        setStudentForm(data.isVerified);
     }
     
     const handleStudentDetails = (e) => {
@@ -41,9 +53,21 @@ const LinkVerification = () => {
         setStudentName({ ...student, [name]: value });
     }
 
-    const handleStudent = () =>  {
-        console.log('Student details:', student.firstName, student.LastName);
-        setShowInstruction(true);
+    const handleStudent = async() =>  {
+        console.log('Student details:', student);
+        const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/register/${id}`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(student)
+        });
+        if (!response.ok) {
+            throw new Error("Error creating student");
+        }
+        const data = await response.json();
+        setShowInstruction(data.isRegistered);
+        setStudentId(data.id);
     }
 
     const startTest = () => {
@@ -97,6 +121,7 @@ const LinkVerification = () => {
     const SubmitQuestion = () => {
         clearInterval(interval.current);
         console.log(checkedStates);
+        setSubmitMessage('Test Submitted Successfully!');
     }
 
     return (
@@ -128,7 +153,7 @@ const LinkVerification = () => {
                             <button className="btn3" onClick={startTest}>Start Test</button>
                         </div>
                     )}
-                    {questionsVisible && currentQuestion && (
+                    {questionsVisible && currentQuestion && !submitMessage &&(
                         <div className="questions">
                             <h2>Please Make sure to Answer all questions</h2>
                             <div className="sub-timer">
@@ -162,6 +187,13 @@ const LinkVerification = () => {
                                 {currentPage < questions.length &&<button className="current" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>}
                             </div>
                             {currentPage === questions.length && <button className="btn4" onClick={SubmitQuestion}>Submit</button>}
+                        </div>
+                    )}
+                    {submitMessage && (
+                        <div className="submit-message">
+                            <h2>{submitMessage}</h2>
+                            <h3>Great Job</h3>
+                            <span><i class='bx bx-check'></i></span>
                         </div>
                     )}
                     </>

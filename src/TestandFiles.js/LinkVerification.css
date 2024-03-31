@@ -273,4 +273,13 @@
     color: #fff;
     border-radius: 7px;
 }
+.submit-message {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 

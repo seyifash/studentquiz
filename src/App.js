@@ -5,7 +5,7 @@ import Test from './routes/test';
 function App() {
   return (
     <Routes>
-      <Route path="/api/learners/v1/take-quiz/" element={<Test />} />
+      <Route path="/api/learners/v1/take-quiz/:id" element={<Test />} />
     </Routes>
   );
 }
