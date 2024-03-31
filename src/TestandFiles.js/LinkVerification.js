@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './LinkVerification.css';
 import logo from '../laptop.png';
-import testQuestions from './question';
+/*import testQuestions from './question';*/
 import 'boxicons/css/boxicons.min.css';
 import { useParams } from 'react-router-dom';
 /*import TestQuestions from './GenerateQuestions';*/
@@ -23,6 +23,7 @@ const LinkVerification = () => {
     const [hours, setHours] = useState(0);
     const [submitMessage, setSubmitMessage ] = useState('');
     const [studentId, setStudentId] = useState(null);
+    const [testQuestions, setTestQuestions] = useState();
 
    
 
@@ -68,6 +69,7 @@ const LinkVerification = () => {
         const data = await response.json();
         setShowInstruction(data.isRegistered);
         setStudentId(data.id);
+        setTestQuestions(data.testQuestions);
     }
 
     const startTest = () => {
@@ -75,7 +77,7 @@ const LinkVerification = () => {
         setQuestionsVisible(true);
         setTestStarted(true);
         setStudentForm(false); // Hide "Create Student" div when test starts
-        setTimer(1);
+        setTimer(testQuestions.duration);
     };
 
     //function to start time count based on the given time and also end the time
@@ -118,9 +120,20 @@ const LinkVerification = () => {
         updatedStates[questionIndex] = { questionId: currentQuestion.id, selectedOption: selectedOptionText };
         setCheckedStates(updatedStates);
     };
-    const SubmitQuestion = () => {
+    const SubmitQuestion = async() => {
         clearInterval(interval.current);
         console.log(checkedStates);
+        const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/calculate-score/${id}`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({quiz: checkedStates, studentId: studentId})
+        });
+        if (!response.ok) {
+            throw new Error("Error submitting quiz");
+        }
+        const data = await response.json();
         setSubmitMessage('Test Submitted Successfully!');
     }
 
@@ -135,8 +148,8 @@ const LinkVerification = () => {
                 !showInstruction && !questionsVisible ? (
                 <div className="CreateStudent">
                     <h2>Please Enter The Name Registered with Tutor</h2>
-                    <input name="firstName" type="text" value={student.firstName} onChange={handleStudentDetails} placeHolder="First Name" required />
-                    <input name="LastName" type="text" value={student.LastName} onChange={handleStudentDetails} placeHolder="Last Name" required />
+                    <input name="firstName" type="text" value={student.firstName} onChange={handleStudentDetails} placeholder="First Name" required />
+                    <input name="LastName" type="text" value={student.LastName} onChange={handleStudentDetails} placeholder="Last Name" required />
                     <button className="btn2" onClick={handleStudent}>Submit</button>
                 </div>
                 ) : (
@@ -157,7 +170,7 @@ const LinkVerification = () => {
                         <div className="questions">
                             <h2>Please Make sure to Answer all questions</h2>
                             <div className="sub-timer">
-                                <h2 className="subject">Subject: {testQuestions.subject}</h2>
+                                <h2 className="subject">Subject: {testQuestions.Subject}</h2>
                                 <h1>Time: {hours < 10 ? "0" + hours : hours } : {minute < 10 ? "0" + minute : minute} : {seconds < 10 ? "0" + seconds : seconds}</h1>
                             </div>
                             <div className="question">
@@ -192,8 +205,7 @@ const LinkVerification = () => {
                     {submitMessage && (
                         <div className="submit-message">
                             <h2>{submitMessage}</h2>
-                            <h3>Great Job</h3>
-                            <span><i class='bx bx-check'></i></span>
+                            <h3>Great Job <i class='bx bx-check'></i></h3>
                         </div>
                     )}
                     </>
