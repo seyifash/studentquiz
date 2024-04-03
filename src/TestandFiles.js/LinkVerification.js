@@ -11,7 +11,7 @@ const LinkVerification = () => {
     const [passCode, setPassCode] = useState('');
     const [studentForm, setStudentForm] = useState(false);
     const [showInstruction, setShowInstruction] = useState(false);
-    const [student, setStudentName] = useState({firstName: '', LastName: '', Email: '', Email: ''});
+    const [student, setStudentName] = useState({firstName: '', LastName: '', Email: ''});
     const [questionsVisible, setQuestionsVisible] = useState(false); 
     const [timer, setTimer] = useState(0); 
     const [testStarted, setTestStarted] = useState(false);
