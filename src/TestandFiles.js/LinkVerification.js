@@ -1,6 +1,6 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import './LinkVerification.css';
-import logo from '../laptop.png';
 /*import testQuestions from './question';*/
 import 'boxicons/css/boxicons.min.css';
 import { useParams } from 'react-router-dom';
@@ -11,7 +11,7 @@ const LinkVerification = () => {
     const [passCode, setPassCode] = useState('');
     const [studentForm, setStudentForm] = useState(false);
     const [showInstruction, setShowInstruction] = useState(false);
-    const [student, setStudentName] = useState({firstName: '', LastName: '', Email: ''});
+    const [student, setStudentName] = useState({firstName: '', LastName: '', Email: '', Email: ''});
     const [questionsVisible, setQuestionsVisible] = useState(false); 
     const [timer, setTimer] = useState(0); 
     const [testStarted, setTestStarted] = useState(false);
@@ -134,8 +134,11 @@ const LinkVerification = () => {
             throw new Error("Error submitting quiz");
         }
         const data = await response.json();
+        console.log(data);
         setSubmitMessage('Test Submitted Successfully!');
     }
+
+    
 
     return (
         <>
@@ -151,7 +154,6 @@ const LinkVerification = () => {
                     <input name="Email" type="email" value={student.Email} onChange={handleStudentDetails} placeholder="Email" required />
                     <input name="firstName" type="text" value={student.firstName} onChange={handleStudentDetails} placeholder="First Name" required />
                     <input name="LastName" type="text" value={student.LastName} onChange={handleStudentDetails} placeholder="Last Name" required />
-
                     <button className="btn2" onClick={handleStudent}>Submit</button>
                 </div>
                 ) : (
