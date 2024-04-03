@@ -1,6 +1,6 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import './LinkVerification.css';
-import logo from '../laptop.png';
 /*import testQuestions from './question';*/
 import 'boxicons/css/boxicons.min.css';
 import { useParams } from 'react-router-dom';
@@ -11,7 +11,7 @@ const LinkVerification = () => {
     const [passCode, setPassCode] = useState('');
     const [studentForm, setStudentForm] = useState(false);
     const [showInstruction, setShowInstruction] = useState(false);
-    const [student, setStudentName] = useState({firstName: '', LastName: ''});
+    const [student, setStudentName] = useState({firstName: '', LastName: '', Email: ''});
     const [questionsVisible, setQuestionsVisible] = useState(false); 
     const [timer, setTimer] = useState(0); 
     const [testStarted, setTestStarted] = useState(false);
@@ -134,8 +134,11 @@ const LinkVerification = () => {
             throw new Error("Error submitting quiz");
         }
         const data = await response.json();
+        console.log(data);
         setSubmitMessage('Test Submitted Successfully!');
     }
+
+    
 
     return (
         <>
@@ -150,6 +153,7 @@ const LinkVerification = () => {
                     <h2>Please Enter The Name Registered with Tutor</h2>
                     <input name="firstName" type="text" value={student.firstName} onChange={handleStudentDetails} placeholder="First Name" required />
                     <input name="LastName" type="text" value={student.LastName} onChange={handleStudentDetails} placeholder="Last Name" required />
+                    <input name="Email" type="email" value={student.Email} onChange={handleStudentDetails} placeholder="Email" required /> 
                     <button className="btn2" onClick={handleStudent}>Submit</button>
                 </div>
                 ) : (
@@ -176,10 +180,10 @@ const LinkVerification = () => {
                             <div className="question">
                                 <h3>Question {currentPage}</h3>
                                 <span className="header"><strong>Header: </strong>{currentQuestion.header}</span>
-                                <img src={logo} alt="img-1" />
+                                {currentQuestion.image && <img src={`http://127.0.0.1:5000/api/learners/v1/${currentQuestion.image}`} alt="img-1" />}
                                 <p>{currentQuestion.body}</p>
                                 <div className="options-div">
-                                {Array.from({ length: 5 }).map((_, spanIndex) => (
+                                   {Array.from({ length: 5 }).map((_, spanIndex) => (
                                     <span
                                         key={spanIndex}
                                         id={currentQuestion.id}
