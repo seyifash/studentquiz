@@ -11,7 +11,7 @@ const LinkVerification = () => {
     const [passCode, setPassCode] = useState('');
     const [studentForm, setStudentForm] = useState(false);
     const [showInstruction, setShowInstruction] = useState(false);
-    const [student, setStudentName] = useState({firstName: '', LastName: ''});
+    const [student, setStudentName] = useState({firstName: '', LastName: '', Email: ''});
     const [questionsVisible, setQuestionsVisible] = useState(false); 
     const [timer, setTimer] = useState(0); 
     const [testStarted, setTestStarted] = useState(false);
@@ -116,7 +116,7 @@ const LinkVerification = () => {
 
     const handleCheck = (questionIndex, spanIndex) => {
         const updatedStates = [...checkedStates];
-        const selectedOptionText = spanIndex === 0 ? currentQuestion.right_answer : currentQuestion[`wrong_answer${spanIndex}`];
+        const selectedOptionText = currentQuestion.options[spanIndex];
         updatedStates[questionIndex] = { questionId: currentQuestion.id, selectedOption: selectedOptionText };
         setCheckedStates(updatedStates);
     };
@@ -148,8 +148,10 @@ const LinkVerification = () => {
                 !showInstruction && !questionsVisible ? (
                 <div className="CreateStudent">
                     <h2>Please Enter The Name Registered with Tutor</h2>
+                    <input name="Email" type="email" value={student.Email} onChange={handleStudentDetails} placeholder="Email" required />
                     <input name="firstName" type="text" value={student.firstName} onChange={handleStudentDetails} placeholder="First Name" required />
                     <input name="LastName" type="text" value={student.LastName} onChange={handleStudentDetails} placeholder="Last Name" required />
+
                     <button className="btn2" onClick={handleStudent}>Submit</button>
                 </div>
                 ) : (
@@ -176,17 +178,17 @@ const LinkVerification = () => {
                             <div className="question">
                                 <h3>Question {currentPage}</h3>
                                 <span className="header"><strong>Header: </strong>{currentQuestion.header}</span>
-                                <img src={logo} alt="img-1" />
+                                {currentQuestion.image && <img src={`http://127.0.0.1:5000/api/learners/v1/${currentQuestion.image}`} alt="img-1" />}
                                 <p>{currentQuestion.body}</p>
                                 <div className="options-div">
-                                {Array.from({ length: 5 }).map((_, spanIndex) => (
+                                {currentQuestion.options.map((option, spanIndex) => (
                                     <span
                                         key={spanIndex}
                                         id={currentQuestion.id}
-                                        className={`checks ${checkedStates[currentPage - 1] && checkedStates[currentPage - 1].selectedOption === (spanIndex === 0 ? currentQuestion.right_answer : currentQuestion[`wrong_answer${spanIndex}`]) ? 'checked' : ''}`}
+                                        className={`checks ${checkedStates[currentPage - 1] && checkedStates[currentPage - 1].selectedOption === (currentQuestion.options[spanIndex]) ? 'checked' : ''}`}
                                         onClick={() => handleCheck(currentPage - 1, spanIndex)}
                                     >
-                                        {spanIndex === 0 ? currentQuestion.right_answer : currentQuestion[`wrong_answer${spanIndex}`]}
+                                        {option}
                                     </span>
                                 ))}
                                 </div>

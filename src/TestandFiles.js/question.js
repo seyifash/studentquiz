@@ -37,5 +37,5 @@ const testQuestions =
 
 export default testQuestions;
 
-{/*<div className="timer">{timer}</div>
-{questionsVisible && <TestQuestions questions={testQuestions} />}  */}
+// {/*<div className="timer">{timer}</div>
+// {questionsVisible && <TestQuestions questions={testQuestions} />}  */}
