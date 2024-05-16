@@ -23,7 +23,7 @@
     width: 300px;
     height: 40px;
     outline: none;
-    border: 1px solid orange ;
+    border: 1px solid #fbd3d3;
     border-radius: 10px;
     box-shadow: 0px 7px 25px rgba(0, 0, 0, 0.08);
     margin-bottom: 20px;
@@ -39,7 +39,7 @@
     font-weight: 700;
     color: #000;
     border-radius: 8px;
-    background: orange;
+    background: #fbd3d3;;
 }
 
 .verification button:hover {
@@ -65,7 +65,7 @@
 }
 .instructions h2 {
     font-size: 2.5rem;
-    color: orange;
+    color: #fbd3d3;
     line-height: 4rem; 
 }
 .instructions p{
@@ -95,7 +95,7 @@
     font-size: 1rem;
 }
 .instructions .btn3:hover {
-    background: orange;
+    background: #fbd3d3;
     color: #000;
 }
 
@@ -111,13 +111,13 @@
     margin-bottom: 20px;
     box-shadow: 0px 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 10px;
-    border: 1px solid orange;
+    border: 1px solid #fbd3d3;
     position: relative;
 }
 .questions h2 {
     width: 100%;
     padding: 15px 10px;
-    background: orange;
+    background: #fbd3d3;
     border-radius: 6px;
     margin-bottom: 20px;
 
@@ -159,7 +159,7 @@
 }
 
 .questions .question .header strong {
-    color: orange;
+    color: #fbd3d3;
     padding-right: 10px;
     font-weight: 700;
     font-size: 1.5rem;
@@ -198,7 +198,7 @@
     position: absolute;
     width: 20px;
     height: 20px;
-    border: 1px solid orange;
+    border: 1px solid #fbd3d3;
     background-image: url("../assets/uncheck.png");
     background-size: cover;
     background-position: center;
@@ -235,7 +235,7 @@
 .pagination .prev,
 .pagination .current {
     padding: 7px 15px;
-    background: orange;
+    background: #fbd3d3;
     color: #000;
     font-size: 16px;
     border-radius: 5px;
@@ -244,8 +244,8 @@
     border: none;
 }
 .pagination .prev {
-    background: #000;
-    color: orange;
+    background: #fbd3d3;
+    color: #000;
 }
 .pagination .key {
     padding: 10px 15px;
@@ -283,7 +283,7 @@
 }
 .submit-message h2 {
     font-size: 3rem;
-    color: orange;
+    color: #fbd3d3;
 } 
 
 .submit-message h3 {
