@@ -35,7 +35,7 @@ const LinkVerification = () => {
 
     const handleSubmit = async() => {
         console.log('submitted', passCode);
-        const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/verify/${id}`, {
+        const response = await fetch(`https://buildeapp.org/api/learners/v1/verify/${id}`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json' 
@@ -56,7 +56,7 @@ const LinkVerification = () => {
 
     const handleStudent = async() =>  {
         console.log('Student details:', student);
-        const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/register/${id}`, {
+        const response = await fetch(`https://buildeapp.org/api/learners/v1/register/${id}`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json' 
@@ -123,7 +123,7 @@ const LinkVerification = () => {
     const SubmitQuestion = async() => {
         clearInterval(interval.current);
         console.log(checkedStates);
-        const response = await fetch(`http://127.0.0.1:5000/api/learners/v1/calculate-score/${id}`, {
+        const response = await fetch(`https://buildeapp.org/api/learners/v1/calculate-score/${id}`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json' 
@@ -180,7 +180,7 @@ const LinkVerification = () => {
                             <div className="question">
                                 <h3>Question {currentPage}</h3>
                                 <span className="header"><strong>Header: </strong>{currentQuestion.header}</span>
-                                {currentQuestion.image && <img src={`http://127.0.0.1:5000/api/learners/v1/${currentQuestion.image}`} alt="img-1" />}
+                                {currentQuestion.image && <img src={`https://buildeapp.org/api/learners/v1/${currentQuestion.image}`} alt="img-1" />}
                                 <p>{currentQuestion.body}</p>
                                 <div className="options-div">
                                 {currentQuestion.options.map((option, spanIndex) => (
